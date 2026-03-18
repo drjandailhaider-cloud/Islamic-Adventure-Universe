@@ -1,0 +1,146 @@
+# 🕌 Islamic Adventure Universe
+
+> **Gamified Islamic education for children aged 5–15**
+> Built with Streamlit + Claude AI | Version 1.0.0
+
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.35+-FF4B4B?logo=streamlit)](https://streamlit.io)
+[![Python](https://img.shields.io/badge/Python-3.9+-3776AB?logo=python)](https://python.org)
+[![Claude AI](https://img.shields.io/badge/AI-Claude%20Haiku-8A2BE2)](https://anthropic.com)
+
+---
+
+## ✨ What is this?
+
+Islamic Adventure Universe is a **premium gamified learning platform** where children:
+- Enter an Islamic adventure world
+- Complete story missions with moral decision points
+- Learn Islamic values through interactive AI-powered storytelling
+- Earn XP, badges, and unlock new worlds
+- Build character traits tracked on the Parent Dashboard
+
+**It feels like:** 🎮 Game + 📖 Learning + 🌍 Adventure + 💚 Emotional Growth
+
+---
+
+## 🚀 Quick Start
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/YOUR_USERNAME/islamic-adventure-universe.git
+cd islamic-adventure-universe
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Set up environment
+cp .env.example .env
+# Edit .env and add your ANTHROPIC_API_KEY
+
+# 4. Run!
+streamlit run app.py
+```
+
+Open **http://localhost:8501** in your browser.
+
+---
+
+## 📁 Project Structure
+
+```
+islamic_adventure_universe/
+├── app.py                    # Main entry point & router
+├── requirements.txt          # Python dependencies
+├── .env.example              # Environment variables template
+├── .streamlit/
+│   └── config.toml           # Streamlit theme & config
+├── services/
+│   ├── user_service.py       # Auth, registration, XP updates
+│   ├── mission_service.py    # World/mission data, level calc
+│   ├── ai_service.py         # Claude AI story generation
+│   └── reward_service.py     # Badge evaluation
+├── ui/
+│   ├── styles.py             # Global CSS injection
+│   ├── landing_page.py       # Hero landing page
+│   ├── auth_page.py          # Sign up & login
+│   ├── world_map.py          # World selection
+│   ├── mission_page.py       # Story + choice engine
+│   ├── reward_page.py        # Reward celebration screen
+│   └── dashboard.py          # Parent analytics dashboard
+├── data/
+│   ├── worlds.json           # 4 adventure worlds
+│   ├── levels.json           # XP level thresholds
+│   ├── missions/
+│   │   └── missions.json     # All story missions
+│   ├── rewards/
+│   │   └── badges.json       # Achievement badges
+│   ├── users/                # Auto-created user store
+│   └── progress/             # Auto-created progress store
+└── utils/
+    └── helpers.py            # Shared utilities
+```
+
+---
+
+## 🌍 Adventure Worlds
+
+| World | Theme | Status |
+|-------|-------|--------|
+| 🌅 Desert Journey | Honesty, Patience, Kindness | ✅ Active |
+| 🕌 Medina Quest | Generosity, Brotherhood | ✅ Active |
+| 🌊 Ocean of Knowledge | Islamic Scholarship | 🔒 Coming Soon |
+| 🌸 Garden of Jannah | Good Deeds, Gratitude | 🔒 Coming Soon |
+
+---
+
+## 🤖 AI Features
+
+- **Claude Haiku** generates personalized story continuations per child
+- Prompt engineered for Islamic safety and age-appropriate content
+- **Offline fallback** — app fully works without an API key
+
+---
+
+## 📊 Gamification System
+
+- ⚡ **XP Points** — 35–50 XP per completed mission
+- 🎯 **8 Levels** — Little Seeker → Jannah Seeker
+- 🏅 **6 Badges** — Unlocked by XP milestones
+- 📈 **Progress Bars** — Per world and per level
+
+---
+
+## ☁️ Deploy to Streamlit Cloud (Free)
+
+1. Push to GitHub
+2. Go to [share.streamlit.io](https://share.streamlit.io)
+3. Connect your repo → set `app.py` as entry point
+4. Add `ANTHROPIC_API_KEY` in Secrets
+5. Deploy → Live in ~60 seconds!
+
+---
+
+## 🔮 Roadmap
+
+- [ ] v1.1 — Voice narration (Web Speech API)
+- [ ] v1.2 — Arabic RTL + Urdu language support
+- [ ] v2.0 — Multiplayer missions (2–4 children)
+- [ ] v2.1 — School/teacher dashboard
+- [ ] v2.2 — Premium content packs (Ramadan, Seerah, Hajj)
+- [ ] v3.0 — React Native mobile app
+
+---
+
+## 🛡️ Safety & Values
+
+- 100% halal content, zero ads
+- All stories reviewed for Islamic authenticity
+- Hadith and Quranic references are authentic
+- Kid-safe — no inappropriate content possible via AI prompting
+- Parent dashboard with full visibility
+
+---
+
+## ✦ Adventure Universe AI
+
+*Built with ❤️ for Muslim children worldwide*
+*© 2026 Islamic Adventure Universe*
