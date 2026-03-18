@@ -1,1 +1,50 @@
-
+[
+  {
+    "level": 1,
+    "name": "Little Seeker",
+    "icon": "\ud83c\udf31",
+    "xpNeeded": 0
+  },
+  {
+    "level": 2,
+    "name": "Young Learner",
+    "icon": "\ud83d\udcd6",
+    "xpNeeded": 100
+  },
+  {
+    "level": 3,
+    "name": "Desert Walker",
+    "icon": "\ud83d\udeb6",
+    "xpNeeded": 250
+  },
+  {
+    "level": 4,
+    "name": "Brave Explorer",
+    "icon": "\ud83e\udded",
+    "xpNeeded": 450
+  },
+  {
+    "level": 5,
+    "name": "Light Bearer",
+    "icon": "\u2728",
+    "xpNeeded": 700
+  },
+  {
+    "level": 6,
+    "name": "Wisdom Keeper",
+    "icon": "\ud83d\udcdc",
+    "xpNeeded": 1000
+  },
+  {
+    "level": 7,
+    "name": "Star Guardian",
+    "icon": "\u2b50",
+    "xpNeeded": 1400
+  },
+  {
+    "level": 8,
+    "name": "Jannah Seeker",
+    "icon": "\ud83c\udf1f",
+    "xpNeeded": 2000
+  }
+]
