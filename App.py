@@ -1,7 +1,7 @@
 """
 ╔══════════════════════════════════════════════════════════╗
 ║     ISLAMIC ADVENTURE UNIVERSE — MAIN APP ENTRY          ║
-║     Version: 1.0.0  |  Streamlit + Claude AI             ║
+║     Version: 1.1.0  |  Streamlit + Claude AI             ║
 ╚══════════════════════════════════════════════════════════╝
 """
 
@@ -15,7 +15,7 @@ st.set_page_config(
     menu_items={
         "Get Help": "https://adventureuniverse.ai/help",
         "Report a bug": "https://adventureuniverse.ai/contact",
-        "About": "# Islamic Adventure Universe\nGamified Islamic education for kids aged 5–15.",
+        "About": "# Islamic Adventure Universe\nGamified Islamic education for kids aged 5-15.",
     },
 )
 
@@ -26,6 +26,7 @@ from services.reward_service import RewardService
 from ui.landing_page import render_landing
 from ui.auth_page import render_signup, render_login
 from ui.world_map import render_world_map
+from ui.mission_list import render_mission_list
 from ui.mission_page import render_mission
 from ui.reward_page import render_reward
 from ui.dashboard import render_dashboard
@@ -40,6 +41,9 @@ DEFAULTS = {
     "selected_mission": None,
     "mission_result": None,
     "toast_msg": None,
+    "mission_phase": "story",
+    "chosen_choice": None,
+    "ai_story_text": None,
 }
 for key, val in DEFAULTS.items():
     if key not in st.session_state:
@@ -61,30 +65,54 @@ page = st.session_state.page
 
 if page == "landing":
     render_landing(go)
+
 elif page == "signup":
     render_signup(go, UserService)
+
 elif page == "login":
     render_login(go, UserService)
+
 elif page == "world_map":
     if not st.session_state.user:
         go("landing")
     else:
         render_world_map(go, st.session_state.user, MissionService)
+
+elif page == "mission_list":
+    if not st.session_state.user or not st.session_state.selected_world:
+        go("world_map")
+    else:
+        render_mission_list(
+            go,
+            st.session_state.user,
+            st.session_state.selected_world,
+            MissionService,
+        )
+
 elif page == "mission":
     if not st.session_state.user or not st.session_state.selected_mission:
         go("world_map")
     else:
-        render_mission(go, st.session_state.user, st.session_state.selected_world,
-                       st.session_state.selected_mission, AIService, RewardService)
+        render_mission(
+            go,
+            st.session_state.user,
+            st.session_state.selected_world,
+            st.session_state.selected_mission,
+            AIService,
+            RewardService,
+        )
+
 elif page == "reward":
     if not st.session_state.mission_result:
         go("world_map")
     else:
         render_reward(go, st.session_state.mission_result, st.session_state.user)
+
 elif page == "dashboard":
     if not st.session_state.user:
         go("landing")
     else:
         render_dashboard(go, st.session_state.user)
+
 else:
     go("landing")
