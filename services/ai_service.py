@@ -1,100 +1,65 @@
 """
-User Service — Handles registration, login, profile CRUD.
-Data is persisted to data/users/users.json
+AI Service — Claude API integration for dynamic story generation.
+Falls back to rule-based stories when API key is unavailable.
 """
-import json
-import hashlib
-import uuid
+import os
 from pathlib import Path
-from datetime import datetime
 
-USERS_FILE = Path("data/users/users.json")
+try:
+    import anthropic
+    _HAS_ANTHROPIC = True
+except ImportError:
+    _HAS_ANTHROPIC = False
 
+_FALLBACK_STORIES = [
+    "Your wise decision echoes through the adventure world. The desert winds carry your good deed across the golden dunes, and the stars above shine a little brighter tonight. Remember: every act of kindness plants a seed in the garden of your character. MashaAllah, brave explorer — continue your journey!",
+    "The angels record your righteous choice in the Book of Deeds. As you walk forward, you notice the path ahead becomes clearer and more beautiful. Your heart feels lighter, filled with the warmth that only comes from doing what is right. Keep shining your light, young hero!",
+    "SubhanAllah — your good action ripples outward like water in a still pond, touching lives you cannot even see. The Companions of the Prophet faced similar choices and chose the righteous path, just as you have. Walk forward with your head held high!",
+]
 
-def _load_users() -> dict:
-    if USERS_FILE.exists():
-        with open(USERS_FILE, "r") as f:
-            return json.load(f)
-    return {}
-
-
-def _save_users(users: dict):
-    USERS_FILE.parent.mkdir(parents=True, exist_ok=True)
-    with open(USERS_FILE, "w") as f:
-        json.dump(users, f, indent=2, ensure_ascii=False)
+_story_index = 0
 
 
-def _hash_password(password: str) -> str:
-    return hashlib.sha256(password.encode()).hexdigest()
-
-
-class UserService:
-    AVATARS = [
-        {"id": "a1", "name": "Khalid", "emoji": "🧒", "color": "#4ECDC4"},
-        {"id": "a2", "name": "Maryam", "emoji": "👧", "color": "#FFB347"},
-        {"id": "a3", "name": "Yusuf",  "emoji": "👦", "color": "#87CEEB"},
-        {"id": "a4", "name": "Fatima", "emoji": "🧕", "color": "#DDA0DD"},
-    ]
+class AIService:
 
     @staticmethod
-    def register(name: str, age_group: str, avatar_id: str,
-                 username: str, password: str) -> tuple[bool, str]:
-        """Register new user. Returns (success, message)."""
-        users = _load_users()
-        if username in users:
-            return False, "Username already taken. Try another one!"
-        if len(password) < 4:
-            return False, "Password must be at least 4 characters."
+    def generate_story(child_name: str, mission_title: str, world_name: str,
+                       choice_text: str, islamic_value: str) -> str:
+        """Generate a personalized story continuation using Claude API."""
 
-        avatar = next((a for a in UserService.AVATARS if a["id"] == avatar_id),
-                      UserService.AVATARS[0])
-        users[username] = {
-            "id": str(uuid.uuid4()),
-            "username": username,
-            "password_hash": _hash_password(password),
-            "name": name,
-            "age_group": age_group,
-            "avatar": avatar,
-            "xp": 0,
-            "completed_missions": [],
-            "badges": [],
-            "created_at": datetime.utcnow().isoformat(),
-            "last_login": datetime.utcnow().isoformat(),
-        }
-        _save_users(users)
-        return True, "Welcome to the Adventure Universe!"
+        # Try Claude API first
+        api_key = os.getenv("ANTHROPIC_API_KEY", "")
+        if _HAS_ANTHROPIC and api_key and not api_key.startswith("sk-ant-YOUR"):
+            try:
+                client = anthropic.Anthropic(api_key=api_key)
+                model = os.getenv("AI_MODEL", "claude-haiku-4-5-20251001")
+                max_tokens = int(os.getenv("AI_MAX_TOKENS", "400"))
 
-    @staticmethod
-    def login(username: str, password: str) -> tuple[bool, dict | str]:
-        """Login user. Returns (success, user_dict or error_msg)."""
-        users = _load_users()
-        user = users.get(username)
-        if not user:
-            return False, "Username not found."
-        if user["password_hash"] != _hash_password(password):
-            return False, "Incorrect password."
-        user["last_login"] = datetime.utcnow().isoformat()
-        _save_users(users)
-        return True, user
+                prompt = f"""You are a kind Islamic storyteller for children aged 5-15.
+Child named {child_name} completed mission "{mission_title}" in "{world_name}" adventure world.
+They chose: "{choice_text}"
+Islamic value learned: {islamic_value}
 
-    @staticmethod
-    def update_progress(username: str, mission_id: str, xp_gained: int,
-                        new_badges: list[str]) -> dict:
-        """Update user XP, completed missions, badges. Returns updated user."""
-        users = _load_users()
-        user = users.get(username)
-        if not user:
-            return {}
-        if mission_id not in user["completed_missions"]:
-            user["completed_missions"].append(mission_id)
-        user["xp"] += xp_gained
-        for badge in new_badges:
-            if badge not in user["badges"]:
-                user["badges"].append(badge)
-        users[username] = user
-        _save_users(users)
-        return user
+Write a SHORT (3-4 sentence) magical adventure continuation.
+Rules:
+- Simple beautiful language a child loves
+- Mention one hadith/Quranic concept briefly (no full text)
+- End with warm encouragement
+- Feel like a real adventure continuing
+- Purely educational and inspirational
+- No inappropriate content whatsoever"""
 
-    @staticmethod
-    def get_all_avatars() -> list:
-        return UserService.AVATARS
+                message = client.messages.create(
+                    model=model,
+                    max_tokens=max_tokens,
+                    messages=[{"role": "user", "content": prompt}],
+                )
+                return message.content[0].text.strip()
+            except Exception:
+                pass  # Fall through to fallback
+
+        # Rule-based fallback
+        global _story_index
+        story = _FALLBACK_STORIES[_story_index % len(_FALLBACK_STORIES)]
+        _story_index += 1
+        return story
