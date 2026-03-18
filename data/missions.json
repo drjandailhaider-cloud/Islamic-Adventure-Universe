@@ -1,1 +1,140 @@
-
+{
+  "w1": [
+    {
+      "id": "m1",
+      "title": "The Lost Traveler",
+      "icon": "🧭",
+      "value": "Helping Others",
+      "xp": 40,
+      "story": "You cross the golden desert when you spot an old man struggling with heavy bags. The caravan is moving fast...",
+      "choices": [
+        {
+          "text": "Stop and help him carry his bags",
+          "outcome": "You helped the traveler and he blessed you. The Prophet said: The best of people are those most beneficial to others.",
+          "positive": true,
+          "xp": 40
+        },
+        {
+          "text": "Keep walking — the caravan cannot wait",
+          "outcome": "You kept moving but felt uneasy. Sometimes slowing down is the right choice.",
+          "positive": false,
+          "xp": 5
+        }
+      ]
+    },
+    {
+      "id": "m2",
+      "title": "The Merchant Honesty",
+      "icon": "⚖️",
+      "value": "Truthfulness",
+      "xp": 45,
+      "story": "A merchant gives you extra change by mistake. You realize only after walking away. You have 10 extra coins...",
+      "choices": [
+        {
+          "text": "Return to the merchant and give back the coins",
+          "outcome": "SubhanAllah! Your honesty made the merchant cry with joy. Be truthful for truth leads to righteousness.",
+          "positive": true,
+          "xp": 45
+        },
+        {
+          "text": "Keep the coins — it was his mistake",
+          "outcome": "The coins felt heavy in your pocket. Something did not feel right inside.",
+          "positive": false,
+          "xp": 5
+        }
+      ]
+    },
+    {
+      "id": "m3",
+      "title": "The Thirsty Camel",
+      "icon": "🐪",
+      "value": "Kindness to Animals",
+      "xp": 35,
+      "story": "Your camel is thirsty and there is water ahead, but a stray dog whimpers nearby with no one to care for it...",
+      "choices": [
+        {
+          "text": "Share some water with the dog too",
+          "outcome": "A woman was once forgiven all her sins for giving water to a thirsty dog. You earned great reward!",
+          "positive": true,
+          "xp": 35
+        },
+        {
+          "text": "Use all water for your camel only",
+          "outcome": "Your camel was satisfied, but you passed a chance to earn great reward.",
+          "positive": false,
+          "xp": 5
+        }
+      ]
+    },
+    {
+      "id": "m4",
+      "title": "Patience at Dawn",
+      "icon": "🌅",
+      "value": "Patience and Salah",
+      "xp": 50,
+      "story": "Fajr time arrives. You are exhausted from the long desert journey. Your blanket is warm and the sand is cold...",
+      "choices": [
+        {
+          "text": "Wake up, make wudu, and pray Fajr",
+          "outcome": "Allahu Akbar! Two rakats at Fajr are better than the world and all it contains. Your heart feels light.",
+          "positive": true,
+          "xp": 50
+        },
+        {
+          "text": "Sleep a little more and pray later",
+          "outcome": "You missed the blessing of Fajr time. Tomorrow try harder. Every dawn is a new chance.",
+          "positive": false,
+          "xp": 5
+        }
+      ]
+    }
+  ],
+  "w2": [
+    {
+      "id": "m5",
+      "title": "The Neighbor Need",
+      "icon": "🏠",
+      "value": "Neighborly Kindness",
+      "xp": 45,
+      "story": "Your neighbor knocks. Her family has not eaten today. You have just enough food for your family...",
+      "choices": [
+        {
+          "text": "Share half your food with her family",
+          "outcome": "He is not a believer who eats his fill while his neighbor goes hungry. You chose the way of the Prophet.",
+          "positive": true,
+          "xp": 45
+        },
+        {
+          "text": "Say you do not have enough and close the door",
+          "outcome": "That night your meal did not taste as good as it should. Generosity multiplies blessings.",
+          "positive": false,
+          "xp": 5
+        }
+      ]
+    },
+    {
+      "id": "m6",
+      "title": "The Angry Friend",
+      "icon": "😤",
+      "value": "Controlling Anger",
+      "xp": 40,
+      "story": "Your best friend broke your favourite toy by accident. You feel very angry. What do you do?",
+      "choices": [
+        {
+          "text": "Take a deep breath and forgive him",
+          "outcome": "The Prophet said: The strong person is not the one who can wrestle but the one who controls themselves when angry.",
+          "positive": true,
+          "xp": 40
+        },
+        {
+          "text": "Yell at him and walk away",
+          "outcome": "Your friend cried. Anger rarely solves things and often breaks what we love most.",
+          "positive": false,
+          "xp": 5
+        }
+      ]
+    }
+  ],
+  "w3": [],
+  "w4": []
+}
