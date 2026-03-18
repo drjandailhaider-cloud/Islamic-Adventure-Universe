@@ -1,1 +1,44 @@
-
+[
+  {
+    "id": "b1",
+    "name": "First Step",
+    "icon": "👣",
+    "desc": "Completed your first mission",
+    "xpRequired": 0
+  },
+  {
+    "id": "b2",
+    "name": "Truth Seeker",
+    "icon": "🔍",
+    "desc": "Made 3 honest choices",
+    "xpRequired": 100
+  },
+  {
+    "id": "b3",
+    "name": "Desert Hero",
+    "icon": "🏆",
+    "desc": "Completed Desert Journey world",
+    "xpRequired": 170
+  },
+  {
+    "id": "b4",
+    "name": "Kind Heart",
+    "icon": "💚",
+    "desc": "Helped 5 characters in stories",
+    "xpRequired": 200
+  },
+  {
+    "id": "b5",
+    "name": "Scholar",
+    "icon": "📚",
+    "desc": "Learned 10 Islamic values",
+    "xpRequired": 350
+  },
+  {
+    "id": "b6",
+    "name": "Guardian",
+    "icon": "🛡️",
+    "desc": "Reached Level 5",
+    "xpRequired": 500
+  }
+]
